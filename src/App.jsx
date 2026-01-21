@@ -16,8 +16,8 @@ function App() {
   // Simulating your future data list
 
 const graphArray = [
-  { id: 1, title: "Temperature Sensor", url: 'http://localhost:3000/ldes/RiverStage1Year' },
-  { id: 2, title: "Humidity Analytics", url: 'http://localhost:3000/ldes/RiverDischarge1Year' },
+  { id: 1, title: "RiverDischarge1Year", url: 'http://localhost:3000/ldes/RiverDischarge1Year' },
+  { id: 2, title: "RiverStage1Year", url: 'http://localhost:3000/ldes/RiverStage1Year' },
 ];
 
   return (
