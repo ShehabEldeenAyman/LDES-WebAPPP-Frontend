@@ -2,6 +2,8 @@ import React, { useState ,useEffect} from 'react';
 import { BodyCard } from './components/BodyCard';
 import { MapCardHead, MapCardBody } from './components/MapCard';
 import { BenchmarksCardHead, BenchmarksCardBody } from './components/BenchmarksCard';
+import { ChartCardHead,ChartCardBody } from './components/ChartCard';
+import { LDESChart } from './components/ChartComponents/LDESChart';
 
 const App = () => {
   // 1. Initialize state to track the active section
@@ -55,6 +57,36 @@ const renderBodyContent = () => {
   );
       case 'Benchmarks':
         return <BodyCard Top={BenchmarksCardHead} Bottom={BenchmarksCardBody} />
+      case 'LDES':
+        return (
+          <BodyCard 
+            Top={() => <ChartCardHead title="LDES Charts" />} 
+            Bottom={() => (
+              <ChartCardBody 
+                charts={[
+                <LDESChart 
+                URL="http://localhost:3000/virtuoso/ldes/RiverStage1Year"
+                title="River Stage - Virtuoso"
+                />,
+                <LDESChart
+                URL="http://localhost:3000/oxigraph/ldes/RiverStage1Year"
+                title="River Stage - Oxigraph"
+                />,
+                <LDESChart
+                URL="http://localhost:3000/oxigraph/ldes/RiverDischarge1Year"
+                title="River Discharge - Oxigraph"
+                />,
+                <LDESChart
+                URL="http://localhost:3000/virtuoso/ldes/RiverDischarge1Year"
+                title="River Discharge - Virtuoso"
+                />,
+              
+              ]} // place multiple charts here
+                placeholder="Awaiting Real-Time Streamflow Data for Mol Sluis..." 
+              />
+            )} 
+          />
+        );
       default:
         return <div>Coming Soon...</div>;
     }
