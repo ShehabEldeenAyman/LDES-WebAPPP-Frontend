@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { BodyCard } from './components/BodyCard';
-import { MapCardHead, MapCardBody } from './components/MapCard/MapCard';
+import { MapCardHead, MapCardBody } from './components/MapCard';
+import { BenchmarksCardHead, BenchmarksCardBody } from './components/BenchmarksCard';
 
 const App = () => {
   // 1. Initialize state to track the active section
-  const [activeTab, setActiveTab] = useState('Oxigraph');
+  const [activeTab, setActiveTab] = useState('Station Info');
 
-  const navItems = ['Oxigraph', 'Virtuoso', 'Postgres', 'Benchmarks', 'Station Info', 'Live Data'];
+  const navItems = ['Station Info', 'LDES', 'LDES + TSS', 'TTL', 'Benchmarks', 'Query', 'Live Data'];
 
 
 
@@ -48,12 +49,14 @@ const App = () => {
 
 const renderBodyContent = () => {
     switch (activeTab) {
-      case 'Postgres':
+      case 'Station Info':
         return (
           <BodyCard Top={MapCardHead} Bottom={MapCardBody} />
   );
+      case 'Benchmarks':
+        return <BodyCard Top={BenchmarksCardHead} Bottom={BenchmarksCardBody} />
       default:
-        return <div>Select a database from the sidebar to view details.</div>;
+        return <div>Coming Soon...</div>;
     }
   };
 

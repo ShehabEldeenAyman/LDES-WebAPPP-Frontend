@@ -1,5 +1,9 @@
 import { color } from 'echarts';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import 'leaflet/dist/leaflet.css';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
+
   // 2. Styles for the inner layout
   const innerStyles = {
     container: {
@@ -93,7 +97,7 @@ const renderSubContent = () => {
       case 'Attributes':
         return <AttributesTab />;
       case 'Map':
-        return <div><h3>Overview Content Placeholder</h3></div>;
+        return <MapTab />;
       default:
         return <div><h3>Overview Content Placeholder</h3></div>;
     }
@@ -125,6 +129,31 @@ const renderSubContent = () => {
   );
 };
 
+const MapTab = () => {
+  // Approximate coordinates for Mol Sluis / Dessel–Kwaadmechelen area
+  const position = [51.1903, 5.1157]; 
+
+  return (
+    <div style={{ height: '400px', width: '100%', borderRadius: '8px', overflow: 'hidden' }}>
+      <MapContainer 
+        center={position} 
+        zoom={13} 
+        style={{ height: '100%', width: '100%' }}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={position}>
+          <Popup>
+            <strong>Mol Sluis Station</strong> <br />
+            Monitoring River Stage and Discharge. 
+          </Popup>
+        </Marker>
+      </MapContainer>
+    </div>
+  );
+};
 
 const UsecaseTab = () => (
 <div>
