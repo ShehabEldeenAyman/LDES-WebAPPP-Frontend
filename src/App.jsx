@@ -4,12 +4,14 @@ import { MapCardHead, MapCardBody } from './components/MapCard';
 import { BenchmarksCardHead, BenchmarksCardBody } from './components/BenchmarksCard';
 import { ChartCardHead,ChartCardBody } from './components/ChartCard';
 import { LDESChart } from './components/ChartComponents/LDESChart';
+import { LDESTSSChart } from './components/ChartComponents/LDESTSSChart';
+import { TTLChart } from './components/ChartComponents/TTLChart';
 
 const App = () => {
   // 1. Initialize state to track the active section
   const [activeTab, setActiveTab] = useState('Station Info');
 
-  const navItems = ['Station Info', 'LDES', 'LDES + TSS', 'TTL', 'Benchmarks', 'Query', 'Live Data'];
+  const navItems = ['Station Info', 'LDES', 'LDES + TSS', 'TTL','SQL', 'Benchmarks', 'Query', 'Live Data'];
 
 
 
@@ -68,6 +70,10 @@ const renderBodyContent = () => {
                 URL="http://localhost:3000/virtuoso/ldes/RiverStage1Year"
                 title="River Stage - Virtuoso"
                 />,
+                  <LDESChart
+                URL="http://localhost:3000/virtuoso/ldes/RiverDischarge1Year"
+                title="River Discharge - Virtuoso"
+                />,
                 <LDESChart
                 URL="http://localhost:3000/oxigraph/ldes/RiverStage1Year"
                 title="River Stage - Oxigraph"
@@ -76,11 +82,65 @@ const renderBodyContent = () => {
                 URL="http://localhost:3000/oxigraph/ldes/RiverDischarge1Year"
                 title="River Discharge - Oxigraph"
                 />,
-                <LDESChart
-                URL="http://localhost:3000/virtuoso/ldes/RiverDischarge1Year"
+              ]} // place multiple charts here
+                placeholder="Awaiting Real-Time Streamflow Data for Mol Sluis..." 
+              />
+            )} 
+          />
+        );
+      case 'LDES + TSS':
+        return (
+          <BodyCard 
+            Top={() => <ChartCardHead title="LDES Charts" />} 
+            Bottom={() => (
+              <ChartCardBody 
+                charts={[
+                <LDESTSSChart 
+                URL="http://localhost:3000/virtuoso/ldestss/RiverStage1Year"
+                title="River Stage - Virtuoso"
+                />,
+                <LDESTSSChart 
+                URL="http://localhost:3000/virtuoso/ldestss/RiverDischarge1Year"
                 title="River Discharge - Virtuoso"
                 />,
-              
+                <LDESTSSChart 
+                URL="http://localhost:3000/oxigraph/ldestss/RiverStage1Year"
+                title="River Stage - Oxigraph"
+                />,
+                <LDESTSSChart 
+                URL="http://localhost:3000/oxigraph/ldestss/RiverDischarge1Year"
+                title="River Discharge - Oxigraph"
+                />,
+              ]} // place multiple charts here
+                placeholder="Awaiting Real-Time Streamflow Data for Mol Sluis..." 
+              />
+            )} 
+          />
+        );
+      case 'TTL':
+                return (
+          <BodyCard 
+            Top={() => <ChartCardHead title="LDES Charts" />} 
+            Bottom={() => (
+              <ChartCardBody 
+                charts={[
+                <TTLChart 
+                URL="http://localhost:3000/virtuoso/ttl/RiverStage1Year"
+                title="River Stage - Virtuoso"
+                />,
+                                <TTLChart 
+                URL="http://localhost:3000/virtuoso/ttl/RiverDischarge1Year"
+                title="River Discharge - Virtuoso"
+                />,
+                                <TTLChart 
+                URL="http://localhost:3000/oxigraph/ttl/RiverStage1Year"
+                title="River Stage - Oxigraph"
+                />,
+                                <TTLChart 
+                URL="http://localhost:3000/oxigraph/ttl/RiverDischarge1Year"
+                title="River Discharge - Oxigraph"
+                />,
+
               ]} // place multiple charts here
                 placeholder="Awaiting Real-Time Streamflow Data for Mol Sluis..." 
               />
