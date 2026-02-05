@@ -66,7 +66,15 @@ const renderBodyContent = () => {
           <BodyCard Top={MapCardHead} Bottom={MapCardBody} />
   );
       case 'Benchmarks':
-        return <BodyCard Top={BenchmarksCardHead} Bottom={BenchmarksCardBody} />
+        return <BodyCard Top={BenchmarksCardHead} Bottom={() => (<ChartCardBody 
+                charts={[
+                <BenchmarksCardBody url="http://localhost:3000/ingestbenchmarks" />,
+                <BenchmarksCardBody url="http://localhost:3000/recallbenchmarks" />
+
+
+              ]} // place multiple charts here
+                placeholder="Awaiting Benchmarks..." 
+              />)} />
       case 'LDES':
         return (
           <BodyCard 

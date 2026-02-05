@@ -9,14 +9,14 @@ export const BenchmarksCardHead = () => {
     );
 }
 
-export const BenchmarksCardBody = () => {
+export const BenchmarksCardBody = ({url}) => {
   const [chartData, setChartData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     // Fetch data from the local benchmarks endpoint
-    fetch("http://localhost:3000/benchmarks")
+    fetch(url)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
