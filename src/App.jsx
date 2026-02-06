@@ -7,12 +7,13 @@ import { LDESChart } from './components/ChartComponents/LDESChart';
 import { LDESTSSChart } from './components/ChartComponents/LDESTSSChart';
 import { TTLChart } from './components/ChartComponents/TTLChart';
 import { SQLChart } from './components/ChartComponents/SQLChart';
+import { QueryCard } from './components/QueryCard';
 
 const App = () => {
   // 1. Initialize state to track the active section
   const [activeTab, setActiveTab] = useState('Station Info');
 
-  const navItems = ['Station Info', 'LDES', 'LDES + TSS', 'TTL','SQL', 'Benchmarks', 'Query', 'Live Data'];
+  const navItems = ['Station Info', 'LDES', 'LDES + TSS', 'TTL','SQL', 'Benchmarks', 'Query'];
 
 
 
@@ -68,8 +69,9 @@ const renderBodyContent = () => {
       case 'Benchmarks':
         return <BodyCard Top={BenchmarksCardHead} Bottom={() => (<ChartCardBody 
                 charts={[
-                <BenchmarksCardBody url="http://localhost:3000/ingestbenchmarks" />,
-                <BenchmarksCardBody url="http://localhost:3000/recallbenchmarks" />
+                <BenchmarksCardBody url="http://localhost:3000/ingestbenchmarks" title="Ingest Benchmarks" />,
+                <BenchmarksCardBody url="http://localhost:3000/recallbenchmarks" title="Recall Benchmarks" />,
+                // <BenchmarksCardBody url="http://localhost:3000/objectcountbenchmarks" title="Object Count Benchmarks" />
 
 
               ]} // place multiple charts here
@@ -184,6 +186,15 @@ const renderBodyContent = () => {
               />
             )} 
           />
+        );
+
+      case 'Query':
+        return(
+          <BodyCard
+          Top={() => <ChartCardHead title="Query Form"/>}
+          Bottom={() =>(
+             <QueryCard/>
+          )} />
         );
 
       default:

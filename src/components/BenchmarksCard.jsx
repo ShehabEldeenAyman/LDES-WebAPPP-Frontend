@@ -9,7 +9,7 @@ export const BenchmarksCardHead = () => {
     );
 }
 
-export const BenchmarksCardBody = ({url}) => {
+export const BenchmarksCardBody = ({url,title}) => {
   const [chartData, setChartData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -45,7 +45,7 @@ export const BenchmarksCardBody = ({url}) => {
 
     return {
       title: {
-        text: 'Data ingestion Benchmarks',
+        text: `${title}`,
         left: 'center',
         textStyle: { fontSize: 14 }
       },
