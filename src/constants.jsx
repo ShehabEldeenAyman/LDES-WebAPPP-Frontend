@@ -1,1 +1,1 @@
-export const backend_server_address = "http://10.2.65.36:3000"
+export const backend_server_address = "https://chatty-boats-sink.loca.lt"
