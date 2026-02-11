@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {backend_server_address} from './constants'
 
 const innerStyles = {
   container: {
@@ -93,16 +94,15 @@ export const QueryCard = () => {
     let baseUrl = '';
     switch (dbType) {
       case 'LDES':
-        baseUrl = 'http://localhost:3000/virtuoso/ldes';
+        baseUrl = `${backend_server_address}/virtuoso/ldes`;
         break;
       case 'LDESTSS':
-        baseUrl = 'http://localhost:3000/virtuoso/ldestss';
+        baseUrl = `${backend_server_address}/virtuoso/ldestss`;
         break;
       case 'TTL':
-        baseUrl = 'http://localhost:3000/virtuoso/ttl';
+        baseUrl = `${backend_server_address}/virtuoso/ttl`;
         break;
-    //   default:
-    //     baseUrl = 'http://localhost:3000/';
+ 
     }
 
     // 2. Append the /query endpoint
