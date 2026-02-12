@@ -8,12 +8,13 @@ import { LDESTSSChart } from './components/ChartComponents/LDESTSSChart';
 import { TTLChart } from './components/ChartComponents/TTLChart';
 import { SQLChart } from './components/ChartComponents/SQLChart';
 import { QueryCard } from './components/QueryCard';
+import { BrowseDataHead,BrowseDataBody } from './components/BrowseData';
 
 const App = () => {
   // 1. Initialize state to track the active section
   const [activeTab, setActiveTab] = useState('Station Info');
 
-  const navItems = ['Station Info', 'LDES', 'LDES + TSS', 'TTL','SQL', 'Benchmarks', 'Query'];
+  const navItems = ['Station Info','Browse Data', 'LDES', 'LDES + TSS', 'TTL','SQL', 'Benchmarks', 'Query'];
 
 
 
@@ -196,6 +197,11 @@ const renderBodyContent = () => {
              <QueryCard/>
           )} />
         );
+
+      case 'Browse Data':
+        return (<BodyCard
+          Top={BrowseDataHead}
+          Bottom={BrowseDataBody} />);
 
       default:
         return <div>Coming Soon...</div>;
