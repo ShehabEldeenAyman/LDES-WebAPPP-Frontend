@@ -1,70 +1,58 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
- const innerStyles = {
-    container: {
-      height: '100%',
-      //backgroundColor: '#1523e0',
-      borderRadius: '1em',
-      display: 'flex',
-      flexDirection: 'column',
-      color: 'white',
-      padding: '1rem',
-      boxSizing: 'border-box'
-    },
-    subNavbar: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '10px',
-      marginBottom: '1rem',
-      fontSize: '0.9rem'
-    },
-    divider: {
-      width: '1px',
-      height: '15px',
-     // backgroundColor: 'rgba(255, 255, 255, 0.4)'
-    },
-    navItem: (isActive) => ({
-      cursor: 'pointer',
-      fontWeight: isActive ? 'bold' : 'normal',
-      opacity: isActive ? 1 : 0.7,
-      transition: 'opacity 0.2s',
-      color: isActive ? '#000000' : '#000000',
-    }),
-    contentArea: {
-      flexGrow: 1,
-      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-      borderRadius: '0.5em',
-      padding: '1rem',
-      color: 'black',
-    }
-  };
-  const headStyles = {
-    title: {
-      textAlign: 'center',        // Centers the H2
-      fontSize: '1.4rem',         // Slightly larger for the header
-      fontWeight: '700',
-      marginBottom: '0',
-      marginTop: '0',
-    },
-    description: {
-      textAlign: 'justify',       // Justifies the body text
-      fontSize: '0.85rem',        // Smaller text size as requested
-      lineHeight: '1.5',          // Increases readability
-      margin: '0',
-      opacity: '0.95',            // Softens the white text slightly
-    }
-  };
-  const tableStyles = {
+const innerStyles = {
+  container: {
+    height: '100%',
+    borderRadius: '1em',
+    display: 'flex',
+    flexDirection: 'column',
+    color: 'white',
+    padding: '1rem',
+    boxSizing: 'border-box'
+  },
+  subNavbar: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    marginBottom: '1rem',
+    fontSize: '0.9rem'
+  },
+  divider: {
+    width: '1px',
+    height: '15px',
+  },
+  navItem: (isActive) => ({
+    cursor: 'pointer',
+    fontWeight: isActive ? 'bold' : 'normal',
+    opacity: isActive ? 1 : 0.7,
+    transition: 'opacity 0.2s',
+    color: '#000000',
+  }),
+  contentArea: {
+    flexGrow: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: '0.5em',
+    padding: '1rem',
+    color: 'black',
+  }
+};
+
+const headStyles = {
+  title: {
+    textAlign: 'center',
+    fontSize: '1.4rem',
+    fontWeight: '700',
+    marginBottom: '0',
+    marginTop: '0',
+  }
+};
+
+const tableStyles = {
   controls: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: '1rem',
-  },
-  select: {
-    padding: '5px',
-    borderRadius: '4px',
-    border: '1px solid #ccc'
   },
   table: {
     width: '100%',
@@ -78,7 +66,8 @@ import React, { useState,useEffect } from 'react';
     padding: '10px',
     textAlign: 'left',
     backgroundColor: '#f2f2f2',
-    color: 'black'
+    color: 'black',
+    textTransform: 'capitalize'
   },
   td: {
     borderBottom: '1px solid #ddd',
@@ -92,19 +81,15 @@ import React, { useState,useEffect } from 'react';
     backgroundColor: '#007bff',
     color: 'white',
     border: 'none',
-    borderRadius: '4px',
-    opacity: (disabled) => disabled ? 0.5 : 1
+    borderRadius: '4px'
   }
 };
 
-export const BrowseDataHead = () => {
-return (
-<div >
-      <h2 style={headStyles.title}>
-        Browse Data
-      </h2>
-    </div>
-);}
+export const BrowseDataHead = () => (
+  <div>
+    <h2 style={headStyles.title}>Browse Data</h2>
+  </div>
+);
 
 export const BrowseDataBody = () => {
   const [activeSubTab, setActiveSubTab] = useState('LDES');
@@ -112,55 +97,52 @@ export const BrowseDataBody = () => {
 
   const renderSubContent = () => {
     switch (activeSubTab) {
-      case 'LDES':
-        return <BrowseLDESData />;
-      case 'LDES + TSS':
-        return <BrowseLDESTSSData />;
-      case 'TTL':
-        return <BrowseTTLData />;
-
-      default:
-        return <div><h3>Overview Content Placeholder</h3></div>;
+      case 'LDES': return <BrowseLDESData />;
+      case 'LDES + TSS': return <BrowseLDESTSSData />;
+      case 'TTL': return <BrowseTTLData />;
+      default: return <div><h3>Overview Content Placeholder</h3></div>;
     }
   };
 
-    return (
-      <div style={innerStyles.container}>
-        {/* 3. Horizontal Sub-Navbar */}
-        <div style={innerStyles.subNavbar}>
-          {menuItems.map((item, index) => (
-            <React.Fragment key={item}>
-              <span 
-                style={innerStyles.navItem(activeSubTab === item)}
-                onClick={() => setActiveSubTab(item)}
-              >
-                {item}
-              </span>
-              {/* 4. Add vertical line between items, but not after the last one */}
-              {index < menuItems.length - 1 && <div style={innerStyles.divider} />}
-            </React.Fragment>
-          ))}
-        </div>
-  
-  <div style={innerStyles.contentArea}>
-          {renderSubContent()}
-        </div>
+  return (
+    <div style={innerStyles.container}>
+      <div style={innerStyles.subNavbar}>
+        {menuItems.map((item, index) => (
+          <React.Fragment key={item}>
+            <span 
+              style={innerStyles.navItem(activeSubTab === item)}
+              onClick={() => setActiveSubTab(item)}
+            >
+              {item}
+            </span>
+            {index < menuItems.length - 1 && <div style={innerStyles.divider} />}
+          </React.Fragment>
+        ))}
       </div>
-    );
-}
+      <div style={innerStyles.contentArea}>
+        {renderSubContent()}
+      </div>
+    </div>
+  );
+};
 
 const BrowseTTLData = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   
-  // Hardcoded query
-  const sparqlQuery = `PREFIX sosa: <http://www.w3.org/ns/sosa/>
+  // Example SPARQL query
+const sparqlQuery = `PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX ex: <http://example.org/>
 SELECT ?subject ?value ?time ?runoffvalue ?observedproperty
 WHERE {
   ?subject sosa:hasSimpleResult ?value ;
            sosa:resultTime ?time;
-        sosa:observedProperty ?observedproperty .
+           sosa:observedProperty ?observedproperty .
+           
+  OPTIONAL { 
+    ?subject ex:hasRunoff ?runoffvalue 
+  }
 }
 ORDER BY DESC(?time)`;
 
@@ -170,13 +152,7 @@ ORDER BY DESC(?time)`;
       const encodedQuery = encodeURIComponent(sparqlQuery);
       const response = await fetch(`http://localhost:3000/virtuoso/ttl/query?page=${page}&query=${encodedQuery}`);
       const result = await response.json();
-      
-      if (Array.isArray(result)) {
-          setData(result);
-      } else {
-          setData(result.results?.bindings || []);
-      }
-
+      setData(Array.isArray(result) ? result : (result.results?.bindings || []));
     } catch (error) {
       console.error("Error fetching TTL data:", error);
     } finally {
@@ -184,32 +160,28 @@ ORDER BY DESC(?time)`;
     }
   };
 
-  // Removed 'endpoint' from dependencies
   useEffect(() => {
     fetchData();
   }, [page]);
 
+  // HIGHLIGHTED CHANGE: Determine columns dynamically from the keys of the first data object
+  const columns = data.length > 0 ? Object.keys(data[0]) : [];
+
   return (
     <div>
-      {/* Controls container: 
-         Since we removed the select on the left, we use justifyContent: 'flex-end' 
-         to keep the pagination buttons aligned to the right.
-      */}
       <div style={{...tableStyles.controls, justifyContent: 'flex-end'}}>
         <div>
           <button 
             disabled={page === 1 || loading}
-            style={{...tableStyles.button, marginRight: '10px'}}
+            style={{...tableStyles.button, marginRight: '10px', opacity: (page === 1 || loading) ? 0.5 : 1}}
             onClick={() => setPage(prev => Math.max(prev - 1, 1))}
           >
             Previous
           </button>
-          
           <span style={{color: 'black', fontWeight: 'bold'}}>Page {page}</span>
-          
           <button 
             disabled={loading || data.length < 100}
-            style={{...tableStyles.button, marginLeft: '10px'}}
+            style={{...tableStyles.button, marginLeft: '10px', opacity: (loading || data.length < 100) ? 0.5 : 1}}
             onClick={() => setPage(prev => prev + 1)}
           >
             Next
@@ -223,23 +195,27 @@ ORDER BY DESC(?time)`;
         <table style={tableStyles.table}>
           <thead>
             <tr>
-              <th style={tableStyles.th}>Subject</th>
-              <th style={tableStyles.th}>Value</th>
-              <th style={tableStyles.th}>Time</th>
+              {/* Generate headers dynamically */}
+              {columns.map(key => (
+                <th key={key} style={tableStyles.th}>{key}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
             {data.length > 0 ? (
-              data.map((row, index) => (
-                <tr key={index}>
-                  <td style={tableStyles.td}>{row.subject}</td>
-                  <td style={tableStyles.td}>{row.value}</td>
-                  <td style={tableStyles.td}>{row.time}</td>
+              data.map((row, rowIndex) => (
+                <tr key={rowIndex}>
+                  {/* Generate cells dynamically based on the keys */}
+                  {columns.map(key => (
+                    <td key={`${rowIndex}-${key}`} style={tableStyles.td}>
+                      {row[key] !== null && row[key] !== undefined ? row[key].toString() : ''}
+                    </td>
+                  ))}
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="3" style={{textAlign: 'center', padding: '20px'}}>No data found</td>
+                <td colSpan={columns.length || 1} style={{textAlign: 'center', padding: '20px'}}>No data found</td>
               </tr>
             )}
           </tbody>
@@ -248,14 +224,6 @@ ORDER BY DESC(?time)`;
     </div>
   );
 };
-var BrowseLDESData = () => {
-    return (<div>
-        <h3>LDES Data Placeholder</h3>
-    </div>);
-}
 
-var BrowseLDESTSSData = () => {
-    return (<div>
-        <h3>LDES + TSS Data Placeholder</h3>
-    </div>);
-}
+const BrowseLDESData = () => (<div><h3>LDES Data Placeholder</h3></div>);
+const BrowseLDESTSSData = () => (<div><h3>LDES + TSS Data Placeholder</h3></div>);
