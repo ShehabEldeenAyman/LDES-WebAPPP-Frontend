@@ -14,7 +14,7 @@ const App = () => {
   // 1. Initialize state to track the active section
   const [activeTab, setActiveTab] = useState('Station Info');
 
-  const navItems = ['Station Info','Browse Data', 'LDES', 'LDES + TSS', 'TTL','SQL', 'Benchmarks', 'Query'];
+  const navItems = ['Station Info','Browse Data', 'LDES Client', 'LDES', 'LDES + TSS', 'TTL','SQL', 'Benchmarks', 'Query'];
 
 
 
@@ -202,6 +202,11 @@ const renderBodyContent = () => {
         return (<BodyCard
           Top={BrowseDataHead}
           Bottom={BrowseDataBody} />);
+        
+            case 'LDES Client':
+        return (
+          <div>coming soon</div>
+        );
 
       default:
         return <div>Coming Soon...</div>;
