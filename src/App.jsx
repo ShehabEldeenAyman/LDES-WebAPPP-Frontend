@@ -9,12 +9,15 @@ import { TTLChart } from './components/ChartComponents/TTLChart';
 import { SQLChart } from './components/ChartComponents/SQLChart';
 import { QueryCard } from './components/QueryCard';
 import { BrowseDataHead,BrowseDataBody } from './components/BrowseData';
+import { LDESClientCard } from './components/LDESClientCard';
+
+
 
 const App = () => {
   // 1. Initialize state to track the active section
   const [activeTab, setActiveTab] = useState('Station Info');
 
-  const navItems = ['Station Info','Browse Data', 'LDES', 'LDES + TSS', 'TTL','SQL', 'Benchmarks', 'Query'];
+  const navItems = ['Station Info','Browse Data', 'LDES Client', 'LDES', 'LDES + TSS', 'TTL','SQL', 'Benchmarks', 'Query'];
 
 
 
@@ -202,6 +205,14 @@ const renderBodyContent = () => {
         return (<BodyCard
           Top={BrowseDataHead}
           Bottom={BrowseDataBody} />);
+        
+            case 'LDES Client':
+        return (
+
+          <BodyCard
+          Top={() => <ChartCardHead title="LDES Client Test"/>}
+          Bottom={LDESClientCard} />
+        );
 
       default:
         return <div>Coming Soon...</div>;
