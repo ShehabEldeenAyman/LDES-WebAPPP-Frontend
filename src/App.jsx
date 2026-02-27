@@ -17,8 +17,8 @@ const App = () => {
   // 1. Initialize state to track the active section
   const [activeTab, setActiveTab] = useState('Station Info');
 
-  const navItems = ['Station Info','Browse Data', 'LDES Client', 'LDES', 'LDES + TSS', 'TTL','SQL', 'Benchmarks', 'Query'];
-
+  //const navItems = ['Station Info','Browse Data', 'LDES', 'LDES + TSS', 'TTL','SQL', 'Benchmarks', 'Query'];
+const navItems = ['Station Info','Browse Data','Query Form', 'River Stage', 'River Discharge', 'Benchmarks' ];
 
 
   const styles = {
@@ -73,14 +73,108 @@ const renderBodyContent = () => {
       case 'Benchmarks':
         return <BodyCard Top={BenchmarksCardHead} Bottom={() => (<ChartCardBody 
                 charts={[
-                <BenchmarksCardBody url={`${base_url}ingestbenchmarks`} title="Ingest Benchmarks" />,
-                <BenchmarksCardBody url={`${base_url}recallbenchmarks`} title="Recall Benchmarks" />,
+                <BenchmarksCardBody url={`${base_url}ingestbenchmarks`} title="Data Ingest Benchmarks" />,
+                <BenchmarksCardBody url={`${base_url}recallbenchmarks`} title="Data Fetch Benchmarks" />,
                 // <BenchmarksCardBody url={`${base_url}objectcountbenchmarks`} title="Object Count Benchmarks" />
 
 
               ]} // place multiple charts here
                 placeholder="Awaiting Benchmarks..." 
               />)} />
+
+      case 'River Stage':
+        return (
+          <BodyCard 
+            Top={() => <ChartCardHead title="River Stage" />} 
+            Bottom={() => (
+              <ChartCardBody 
+                charts={[
+                  <LDESChart
+                URL={`${base_url}oxigraph/ldes/RiverStage1Year`}
+                title="Oxigraph - LDES"
+                />,
+                 <LDESChart 
+                URL={`${base_url}virtuoso/ldes/RiverStage1Year`}
+                title="Virtuoso - LDES"
+                />,
+
+                 <LDESTSSChart 
+                URL={`${base_url}oxigraph/ldestss/RiverStage1Year`}
+                title="Oxigraph - LDES + TSS"
+                />,
+                <LDESTSSChart 
+                URL={`${base_url}virtuoso/ldestss/RiverStage1Year`}
+                title="Virtuoso - LDES + TSS"
+                />,
+
+                                                <TTLChart 
+                URL={`${base_url}oxigraph/ttl/RiverStage1Year`}
+                title="Oxigraph - Plain triples"
+                />,
+                  <TTLChart 
+                URL={`${base_url}virtuoso/ttl/RiverStage1Year`}
+                title="Virtuoso - Plain triples"
+                />,
+                                  <SQLChart
+                    URL={`${base_url}postgres/RiverStage1Year`}
+                    title="SQL - Postgres"
+                  />,
+
+              ]} // place multiple charts here
+                placeholder="Awaiting Real-Time Streamflow Data for Mol Sluis..." 
+              />
+            )} 
+          />
+        );
+
+
+        case 'River Discharge':
+        return (
+          <BodyCard 
+            Top={() => <ChartCardHead title="River Discharge" />} 
+            Bottom={() => (
+              <ChartCardBody 
+                charts={[
+                  <LDESChart
+                URL={`${base_url}oxigraph/ldes/RiverDischarge1Year`}
+                title="Oxigraph - LDES"
+                />,
+                 <LDESChart 
+                URL={`${base_url}virtuoso/ldes/RiverDischarge1Year`}
+                title="Virtuoso - LDES"
+                />,
+
+                 <LDESTSSChart 
+                URL={`${base_url}oxigraph/ldestss/RiverDischarge1Year`}
+                title="Oxigraph - LDES + TSS"
+                />,
+                <LDESTSSChart 
+                URL={`${base_url}virtuoso/ldestss/RiverDischarge1Year`}
+                title="Virtuoso - LDES + TSS"
+                />,
+
+                                                <TTLChart 
+                URL={`${base_url}oxigraph/ttl/RiverDischarge1Year`}
+                title="Oxigraph - Plain triples"
+                />,
+                  <TTLChart 
+                URL={`${base_url}virtuoso/ttl/RiverDischarge1Year`}
+                title="Virtuoso - Plain triples"
+                />,
+                                                  <SQLChart
+                    URL={`${base_url}postgres/RiverDischarge1Year`}
+                    title="SQL - Postgres"
+                  />,
+
+              ]} // place multiple charts here
+                placeholder="Awaiting Real-Time Streamflow Data for Mol Sluis..." 
+              />
+            )} 
+          />
+        );
+
+
+//_______________________________________________________________________________________________        
       case 'LDES':
         return (
           <BodyCard 
@@ -88,18 +182,12 @@ const renderBodyContent = () => {
             Bottom={() => (
               <ChartCardBody 
                 charts={[
-                <LDESChart 
-                URL={`${base_url}virtuoso/ldes/RiverStage1Year`}
-                title="River Stage - Virtuoso"
-                />,
+               
                   <LDESChart
                 URL={`${base_url}virtuoso/ldes/RiverDischarge1Year`}
                 title="River Discharge - Virtuoso"
                 />,
-                <LDESChart
-                URL={`${base_url}oxigraph/ldes/RiverStage1Year`}
-                title="River Stage - Oxigraph"
-                />,
+
                 <LDESChart
                 URL={`${base_url}oxigraph/ldes/RiverDischarge1Year`}
                 title="River Discharge - Oxigraph"
@@ -117,18 +205,12 @@ const renderBodyContent = () => {
             Bottom={() => (
               <ChartCardBody 
                 charts={[
-                <LDESTSSChart 
-                URL={`${base_url}virtuoso/ldestss/RiverStage1Year`}
-                title="River Stage - Virtuoso"
-                />,
+
                 <LDESTSSChart 
                 URL={`${base_url}virtuoso/ldestss/RiverDischarge1Year`}
                 title="River Discharge - Virtuoso"
                 />,
-                <LDESTSSChart 
-                URL={`${base_url}oxigraph/ldestss/RiverStage1Year`}
-                title="River Stage - Oxigraph"
-                />,
+
                 <LDESTSSChart 
                 URL={`${base_url}oxigraph/ldestss/RiverDischarge1Year`}
                 title="River Discharge - Oxigraph"
@@ -146,18 +228,12 @@ const renderBodyContent = () => {
             Bottom={() => (
               <ChartCardBody 
                 charts={[
-                <TTLChart 
-                URL={`${base_url}virtuoso/ttl/RiverStage1Year`}
-                title="River Stage - Virtuoso"
-                />,
+              
                                 <TTLChart 
                 URL={`${base_url}virtuoso/ttl/RiverDischarge1Year`}
                 title="River Discharge - Virtuoso"
                 />,
-                                <TTLChart 
-                URL={`${base_url}oxigraph/ttl/RiverStage1Year`}
-                title="River Stage - Oxigraph"
-                />,
+
                                 <TTLChart 
                 URL={`${base_url}oxigraph/ttl/RiverDischarge1Year`}
                 title="River Discharge - Oxigraph"
@@ -176,10 +252,7 @@ const renderBodyContent = () => {
             Bottom={() => (
               <ChartCardBody 
                 charts={[
-                  <SQLChart
-                    URL={`${base_url}postgres/RiverStage1Year`}
-                    title="River Stage - SQL/Postgres"
-                  />,
+
                     <SQLChart
                     URL={`${base_url}postgres/RiverDischarge1Year`}
                     title="River Discharge - SQL/Postgres"
@@ -192,7 +265,7 @@ const renderBodyContent = () => {
           />
         );
 
-      case 'Query':
+      case 'Query Form':
         return(
           <BodyCard
           Top={() => <ChartCardHead title="Query Form"/>}
@@ -225,7 +298,7 @@ const renderBodyContent = () => {
       <div style={styles.mainContent}>
         <nav style={styles.navbar}>
           <h2 style={{ marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '1rem' }}>
-            Database Central
+            ESWC 2026 Demo
           </h2>
           <ul style={{ padding: 0, margin: 0 }}>
             {navItems.map((item) => (

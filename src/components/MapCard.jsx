@@ -131,7 +131,7 @@ const renderSubContent = () => {
 
 const MapTab = () => {
   // Approximate coordinates for Mol Sluis / Dessel–Kwaadmechelen area
-  const position = [51.1903, 5.1157]; 
+  const position = [51.218380136820564, 5.076988914517779]; 
 
   return (
     <div style={{ height: '400px', width: '100%', borderRadius: '8px', overflow: 'hidden' }}>
