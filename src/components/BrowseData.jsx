@@ -93,15 +93,16 @@ export const BrowseDataHead = () => (
 );
 
 export const BrowseDataBody = () => {
-  const [activeSubTab, setActiveSubTab] = useState('LDES');
-  const menuItems = ['LDES', 'LDES + TSS', 'TTL'];
+  const [activeSubTab, setActiveSubTab] = useState(' ');
+  //const menuItems = ['LDES', 'LDES + TSS', 'TTL'];
+  const menuItems = [' '];
 
   const renderSubContent = () => {
     switch (activeSubTab) {
-      case 'LDES': return <BrowseLDESData />;
-      case 'LDES + TSS': return <BrowseLDESTSSData />;
-      case 'TTL': return <BrowseTTLData />;
-      default: return <div><h3>Overview Content Placeholder</h3></div>;
+      //case 'LDES': return <BrowseLDESData />;
+      //case 'LDES + TSS': return <BrowseLDESTSSData />;
+      //case 'TTL': return <BrowseTTLData />;
+      default: return <BrowseTTLData />;
     }
   };
 
