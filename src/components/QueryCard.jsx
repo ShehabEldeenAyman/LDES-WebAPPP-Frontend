@@ -171,9 +171,9 @@ export const QueryCard = () => {
     let baseUrl = '';
     switch (dbType) {
       case 'LDES': baseUrl = 'http://localhost:3000/virtuoso/ldes'; break;
-      case 'LDESTSS': baseUrl = 'http://localhost:3000/virtuoso/ldestss'; break;
-      case 'TTL': baseUrl = 'http://localhost:3000/virtuoso/ttl'; break;
-      default: baseUrl = 'http://localhost:3000/virtuoso/ttl';
+      //case 'LDESTSS': baseUrl = 'http://localhost:3000/virtuoso/ldestss'; break;
+      //case 'TTL': baseUrl = 'http://localhost:3000/virtuoso/ttl'; break;
+      default: baseUrl = 'http://localhost:3000/virtuoso/ldes';
     }
 
     const encodedQuery = encodeURIComponent(query);
@@ -197,15 +197,14 @@ export const QueryCard = () => {
   return (
     <div style={innerStyles.container}>
       <div style={innerStyles.controls}>
-        <label><strong>Database Type: </strong></label>
+        <label><strong>Database: </strong></label>
         <select 
           style={innerStyles.select} 
           value={dbType} 
           onChange={handleDbTypeChange}
         >
-          <option value="LDES">LDES</option>
-          <option value="LDESTSS">LDESTSS</option>
-          <option value="TTL">TTL</option>
+          <option value="LDES">Linked Data</option>
+         
         </select>
         
         <button 
